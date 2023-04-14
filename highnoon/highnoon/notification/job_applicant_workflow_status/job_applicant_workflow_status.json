@@ -1,0 +1,28 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "creation": "2023-02-21 16:27:09.665954",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Job Applicant",
+ "enabled": 1,
+ "event": "Custom",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "Dear Candidate,\n\nYou Application {{ doc.applicant_name }} has been {{ doc.workflow_state }}. {{ frappe.utils.get_link_to_form(doc.doctype, doc.name) }}\n",
+ "modified": "2023-03-01 10:48:19.632457",
+ "modified_by": "Administrator",
+ "module": "Highnoon",
+ "name": "Job Applicant Workflow Status",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_document_field": "owner",
+   "receiver_by_role": ""
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "Job Applicant : {{ doc.applicant_name }} Status"
+}

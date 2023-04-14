@@ -1,0 +1,33 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "creation": "2023-02-20 16:47:24.872871",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Item",
+ "enabled": 1,
+ "event": "Custom",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "Item {{ doc.item }} getting expired in {{ doc.days }} days!",
+ "modified": "2023-02-20 16:47:53.960629",
+ "modified_by": "Administrator",
+ "module": "Highnoon",
+ "name": "Item Getting Expired",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "ZHD-HR-CAM"
+  },
+  {
+   "receiver_by_role": "Sales Manager"
+  },
+  {
+   "receiver_by_role": "Administrator"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "Item {{ doc.item_name }} Getting Expired !!!"
+}

@@ -1,0 +1,27 @@
+{
+ "attach_print": 0,
+ "channel": "Email",
+ "creation": "2023-02-21 15:58:13.788335",
+ "days_in_advance": 0,
+ "docstatus": 0,
+ "doctype": "Notification",
+ "document_type": "Job Applicant",
+ "enabled": 1,
+ "event": "Custom",
+ "idx": 0,
+ "is_standard": 1,
+ "message": "{{ doc.applicant_name }} Created Job Applicant.<br>\nPlease check and approve {{  frappe.utils.get_link_to_form(doc.doctype, doc.name) }}",
+ "modified": "2023-02-21 16:03:06.384182",
+ "modified_by": "Administrator",
+ "module": "Highnoon",
+ "name": "Job Applicant Approval",
+ "owner": "Administrator",
+ "recipients": [
+  {
+   "receiver_by_role": "ZHD-HR-CAM"
+  }
+ ],
+ "send_system_notification": 0,
+ "send_to_all_assignees": 0,
+ "subject": "Workflow Action on Job Applicant : {{ doc.applicant_name }}"
+}
