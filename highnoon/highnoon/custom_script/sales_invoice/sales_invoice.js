@@ -2,6 +2,8 @@ frappe.ui.form.on('Sales Invoice', {
     before_save(frm){
             frm.doc.total_amount = (frm.doc.total - (0.1 * frm.doc.total) + (0.18 * frm.doc.total));
             refresh_field("total_amount ");
+            frm.doc.amount = (frm.doc.total * 10 / 100);
+            refresh_field("amount");
             if(frm.doc.item) {
                 frappe.db.get_value("Item", {"name":frm.doc.item }, ["address"], (r)=>{
                         frm.doc.customer_address = r.address

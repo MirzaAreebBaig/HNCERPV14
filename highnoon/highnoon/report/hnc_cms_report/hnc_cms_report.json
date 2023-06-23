@@ -1,0 +1,42 @@
+{
+ "add_total_row": 0,
+ "columns": [],
+ "creation": "2023-04-18 19:45:06.950736",
+ "disable_prepared_report": 0,
+ "disabled": 0,
+ "docstatus": 0,
+ "doctype": "Report",
+ "filters": [],
+ "idx": 0,
+ "is_standard": "Yes",
+ "letter_head": "HNCPL LOGO",
+ "modified": "2023-04-18 19:45:06.950736",
+ "modified_by": "Administrator",
+ "module": "Highnoon",
+ "name": "HNC CMS Report",
+ "owner": "Administrator",
+ "prepared_report": 0,
+ "ref_doctype": "Employee",
+ "report_name": "HNC CMS Report",
+ "report_type": "Script Report",
+ "roles": [
+  {
+   "role": "Employee"
+  },
+  {
+   "role": "HR Manager"
+  },
+  {
+   "role": "HR User"
+  },
+  {
+   "role": "Employee Self Service"
+  },
+  {
+   "role": "ZHD-TAT"
+  },
+  {
+   "role": "ZHD-HR-CAM"
+  }
+ ]
+}

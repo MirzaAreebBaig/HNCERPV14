@@ -1,4 +1,6 @@
 import frappe
+from frappe import _
+
 
 def get_dashboard_data(data):
     if 'Candidate' in frappe.get_roles(frappe.session.user) or 'ZHD-TAT' in frappe.get_roles(frappe.session.user):
@@ -143,8 +145,8 @@ def validate_item_joining_date(doc,method):
             frappe.db.set_value("Item", i["name"] ,"customer_master" , doc.client_name)
             frappe.db.set_value("Item", i["name"] ,"company" , doc.company_name)
             frappe.db.set_value("Item", i["name"] ,"deployment_location" , doc.deployment_location)
-            frappe.db.set_value("Item", i["name"] ,"aadhar_card" , doc.aadhar_card)
-            frappe.db.set_value("Item", i["name"] ,"pan_card" , doc.pan_card)
+            # frappe.db.set_value("Item", i["name"] ,"aadhar_card" , doc.aadhar_card)
+            # frappe.db.set_value("Item", i["name"] ,"pan_card" , doc.pan_card)
             frappe.db.commit()
 
 def validate_sales_invoice_joining_date(doc,method):
@@ -161,6 +163,11 @@ def validate_sales_invoice_joining_date(doc,method):
             # frappe.db.set_value("Sales Invoice", i["name"] ,"pan_card" , doc.pan_card)
             frappe.db.commit()            
             
+#-----------------------------------Pan card uniqueness checked Globally regardless of entity ----------
+def pan_card_uniqueness(doc,method):
+    if frappe.db.exists("Job Applicant", {"company_name": doc.company_name, "pan_card": doc.pan_card, "aadhar_card": doc.aadhar_card}) and doc.is_new():
+        frappe.throw(frappe._("A pan card number - {0} and aadhar card number- {1} already exists with company name - {2}").format(doc.pan_card,doc.aadhar_card,doc.company_name))
+
 
 
 

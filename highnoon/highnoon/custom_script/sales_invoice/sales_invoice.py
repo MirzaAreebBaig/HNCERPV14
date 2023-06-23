@@ -2,9 +2,13 @@ from __future__ import unicode_literals
 #from frappe.model.document import Document
 import frappe
 from frappe import _
+from datetime import date
+from datetime import datetime # from python std library
+from frappe.utils import add_to_date
 from frappe.utils import (
 	now_datetime, getdate, formatdate
 )
+
 
 #-----------------------------
 # def before_save(doc, method):
@@ -19,8 +23,16 @@ from frappe.utils import (
 def before_save(doc, method):			
 	if doc.items:
 		for item in doc.items:
+			q =add_to_date(doc.start_date1, days=1)
+			if frappe.db.exists("Sales Invoice", {"end_date1": doc.start_date1, "employee_name":doc.employee_name}):
+				frappe.throw(frappe._("Till ({0}) invoice is already generated for employee '{1}''. Please generate next invoice from date ({2}).").format(doc.start_date1,doc.employee_name ,q))
+
+def before_save_validate(doc, method):			
+	if doc.items:
+		for item in doc.items:			
 			if frappe.db.exists("Sales Invoice Item", {"item_name": item.item_name})  and frappe.db.exists("Sales Invoice", {"customer": doc.customer}) and frappe.db.exists("Sales Invoice", {"start_date1": doc.start_date1, "end_date1":doc.end_date1}) and not doc.amended_from and doc.is_new():
 				frappe.throw(frappe._("An Customer Name ({1}) already exists with start date - {2} and end date - {3} and employee ({0})").format(item.item_name, doc.customer, doc.start_date1,doc.end_date1 ))
+			
 
 	
 

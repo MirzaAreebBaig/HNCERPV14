@@ -74,7 +74,7 @@ def allow_property_change(self, prop, meta_df, df):
 
     elif (
         prop == "read_only"
-        and cint(df.get("read_only")) == 0
+        # and cint(df.get("read_only")) == 0
         and frappe.db.get_value(
             "DocField", {"parent": self.doc_type, "fieldname": df.fieldname}, "read_only"
         )

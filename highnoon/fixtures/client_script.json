@@ -1,0 +1,15 @@
+[
+ {
+  "docstatus": 0,
+  "doctype": "Client Script",
+  "dt": "Employee Separation",
+  "enabled": 1,
+  "modified": "2023-05-25 16:04:40.440584",
+  "name": "Employee Separation-Form",
+  "parent": null,
+  "parentfield": null,
+  "parenttype": null,
+  "script": "frappe.ui.form.on('Employee Separation', {\n\tonload(frm) {\n\t    if(frm.doc.employee){\n\t         frappe.db.get_value('Employee Separation Template',{\"name\":\"ZHD-EMP-STP-00001\"}, 'name', (r)=>{\n                \n                    frm.set_value('employee_separation_template', r.name)\n            })\n\t    }\n\t}\n})\n\n",
+  "view": "Form"
+ }
+]

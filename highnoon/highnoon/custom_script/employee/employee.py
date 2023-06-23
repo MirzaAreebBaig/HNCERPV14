@@ -63,7 +63,10 @@ def before_save(self, method):
     except Exception:
         return
     frappe.db.commit()
+    
 
+    
+           
 @frappe.whitelist(allow_guest=True)
 def get_customer_addresses(doctype, txt, searchfield, start, page_len, filters):
     address = frappe.db.sql(""" 
@@ -104,5 +107,32 @@ def update_sales_invoice_details(doc,method):
             frappe.db.set_value("Sales Invoice", i["name"] ,"new_billing" , doc.new_billing)
             frappe.db.set_value("Sales Invoice", i["name"] ,"item_date" , doc.end_date)
             frappe.db.set_value("Sales Invoice", i["name"] ,"client_entity" , doc.client_entity)
-            frappe.db.commit()            
+            frappe.db.commit()
+
+
+#------------------------------------ Job Offer Doctype-----------------------------
+
+def update_job_offer_cost_center(doc,method):
+    name = frappe.db.get_all("Job Offer", filters = {"name":doc.job_offer}, fields =["name"])
+    if name:
+        for i in name:
+            frappe.db.set_value("Job Offer", i["name"] ,"cost_center" , doc.payroll_cost_center)
+            frappe.db.commit()  
+
+#------------------------------------ Job Applicant Doctype-----------------------------
+
+def update_job_applicant_cost_center(doc,method):
+    name = frappe.db.get_all("Job Applicant", filters = {"name":doc.job_applicants}, fields =["name"])
+    if name:
+        for i in name:
+            frappe.db.set_value("Job Applicant", i["name"] ,"cost_center" , doc.payroll_cost_center)
+            frappe.db.commit()  
     
+#--------------------------------------------create new employee separtion doc---------------
+
+def validate(self,method):
+    if self.status == "Inactive":
+        doc = frappe.new_doc("Employee Separation")
+        doc.employee = self.name
+        doc.notify_users_by_email = 1
+        doc.save()

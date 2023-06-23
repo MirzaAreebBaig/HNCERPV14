@@ -63,6 +63,31 @@
  ],
  "custom_perms": [],
  "doctype": "Item Customer Detail",
- "property_setters": [],
+ "property_setters": [
+  {
+   "_assign": null,
+   "_comments": null,
+   "_liked_by": null,
+   "_user_tags": null,
+   "creation": "2023-03-28 19:53:53.344439",
+   "default_value": null,
+   "doc_type": "Item Customer Detail",
+   "docstatus": 0,
+   "doctype_or_field": "DocField",
+   "field_name": "ref_code",
+   "idx": 0,
+   "modified": "2023-03-21 13:19:02.751872",
+   "modified_by": "Administrator",
+   "name": "Item Customer Detail-ref_code-label",
+   "owner": "Administrator",
+   "parent": null,
+   "parentfield": null,
+   "parenttype": null,
+   "property": "label",
+   "property_type": "Data",
+   "row_name": null,
+   "value": "Customer's Purchase Order"
+  }
+ ],
  "sync_on_migrate": 1
 }

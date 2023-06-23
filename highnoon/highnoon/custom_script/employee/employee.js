@@ -44,14 +44,22 @@ frappe.ui.form.on('Employee', {
                     frappe.db.get_value('Employee Onboarding', {'job_applicant': frm.doc.job_applicants}, 'wo_po_id', (r)=>{
                     frm.set_value('work_order_number', r.wo_po_id)
                     })
+                    frappe.db.get_value('Job Offer',{"name":frm.doc.job_offer }, ['base'],  (r)=>{
+                        frm.set_value('new_salary_per_month', r.base)
+                    })
             }
         },
+       
         
     refresh: function(frm) {
         if (has_common(frappe.user_roles, ["Candidate"]) && frappe.session.user != 'Administrator')
 	    {
 	    $('.form-attachments').hide();
 	    }
+        var emp = frm.doc.first_name.replace(/\s/g,'')
+        frm.doc.emp_name = emp.replace(/,/g,'')
+
+        refresh_field("emp_name")
     }
 })
 frappe.ui.form.on("Employee", "customer_address1", function(frm, cdt, cdn) {

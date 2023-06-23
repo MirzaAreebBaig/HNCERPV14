@@ -97,7 +97,7 @@ doctype_list_js = {
 # has_permission = {
 #	"Event": "frappe.desk.doctype.event.event.has_permission",
 # }
-fixtures = ["Custom Field", "Property Setter", "Print Format", "Workflow", "Workflow State", "Workflow Action Master"] 
+fixtures = ["Custom Field", "Property Setter", "Print Format", "Workflow", "Workflow State", "Workflow Action Master","Client Script"] 
 
 # DocType Class
 # ---------------
@@ -113,14 +113,17 @@ fixtures = ["Custom Field", "Property Setter", "Print Format", "Workflow", "Work
 
 doc_events = {
 	"Sales Invoice":{
-		"before_save":["highnoon.highnoon.custom_script.sales_invoice.sales_invoice.validate_item_end_date","highnoon.highnoon.custom_script.sales_invoice.sales_invoice.before_save"],
+		"before_save":["highnoon.highnoon.custom_script.sales_invoice.sales_invoice.validate_item_end_date","highnoon.highnoon.custom_script.sales_invoice.sales_invoice.before_save","highnoon.highnoon.custom_script.sales_invoice.sales_invoice.before_save_validate"],
 		"before_insert": "highnoon.highnoon.custom_script.sales_invoice.sales_invoice.validate_item_life"
 		
 	},
 	"Employee":{
 		"before_save":["highnoon.highnoon.custom_script.employee.employee.before_save",
 		"highnoon.highnoon.custom_script.employee.employee.update_item_details",
-		"highnoon.highnoon.custom_script.employee.employee.update_sales_invoice_details"]
+		"highnoon.highnoon.custom_script.employee.employee.update_sales_invoice_details",
+		"highnoon.highnoon.custom_script.employee.employee.update_job_offer_cost_center",
+		"highnoon.highnoon.custom_script.employee.employee.update_job_applicant_cost_center"],
+		"before_save":"highnoon.highnoon.custom_script.employee.employee.validate"
 	},
 	"Job Offer":{
 		"before_save":"highnoon.highnoon.custom_script.job_offer.job_offer.validate",
@@ -129,9 +132,10 @@ doc_events = {
 	},
 	"Job Applicant": {
 		"on_change": "highnoon.highnoon.custom_script.job_applicant.job_applicant.send_workflow_action_notification",
-		"before_save":["highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_job_offer_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_employee_onboarding_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_employee_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_item_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_sales_invoice_joining_date"]
+		"before_save":["highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_job_offer_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_employee_onboarding_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_employee_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_item_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_sales_invoice_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.pan_card_uniqueness"]
 
 	}
+	
 	
 	
 }
