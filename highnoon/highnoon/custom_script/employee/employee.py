@@ -130,9 +130,15 @@ def update_job_applicant_cost_center(doc,method):
     
 #--------------------------------------------create new employee separtion doc---------------
 
-def validate(self,method):
+def validate(self, method):
     if self.status == "Inactive":
-        doc = frappe.new_doc("Employee Separation")
-        doc.employee = self.name
-        doc.notify_users_by_email = 1
-        doc.save()
+        # Check if an Employee Separation record already exists for this employee
+        existing_separation = frappe.get_all("Employee Separation", filters={"employee": self.name}, limit=1)
+
+        if not existing_separation:
+            # Create a new Employee Separation record
+            doc = frappe.new_doc("Employee Separation")
+            doc.employee = self.name
+            doc.notify_users_by_email = 1
+            doc.insert()
+
