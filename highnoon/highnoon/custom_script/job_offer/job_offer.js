@@ -72,50 +72,69 @@ frappe.ui.form.on('Job Offer', {
     
             }
        
-            /*----------------------------------------pf_employee_contribution_amount----------------------- */
-            if(frm.doc.pf_required == "Yes"){
-            if (frm.doc.monthly_basic_amount <= 15000){
-                frm.doc.monthly_pf_employee_contribution_amount = frm.doc.monthly_basic_amount * 12/100;
-                refresh_field("monthly_pf_employee_contribution_amount");
-                frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
-                refresh_field("annualized_pf_employee_contribution_amount");
+               /*---/*-------------------------------------pf_employee_contribution_amount----------------------- */
+        if (frm.doc.pf_required == "Yes") {
+            // Check if custom_pf_type is "Standard"
+            if (frm.doc.custom_pf_type == "Standard") {
+                if (frm.doc.monthly_basic_amount <= 15000) {
+                    frm.doc.monthly_pf_employee_contribution_amount = frm.doc.monthly_basic_amount * 12 / 100;
+                    refresh_field("monthly_pf_employee_contribution_amount");
+                    frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
+                    refresh_field("annualized_pf_employee_contribution_amount");
                 }
-                if (frm.doc.monthly_basic_amount > 15000){
-                frm.doc.monthly_pf_employee_contribution_amount = 1800;
-                refresh_field("monthly_pf_employee_contribution_amount");
-                frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
-                refresh_field("annualized_pf_employee_contribution_amount");
+                if (frm.doc.monthly_basic_amount > 15000) {
+                    frm.doc.monthly_pf_employee_contribution_amount = 1800;
+                    refresh_field("monthly_pf_employee_contribution_amount");
+                    frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
+                    refresh_field("annualized_pf_employee_contribution_amount");
                 }
             }
-            if(frm.doc.pf_required == "No"){
-                frm.doc.monthly_pf_employee_contribution_amount = 0;
+            // Check if custom_pf_type is "VPF"
+            else if (frm.doc.custom_pf_type == "VPF") {
+                frm.doc.monthly_pf_employee_contribution_amount = frm.doc.monthly_basic_amount * 12 / 100;
                 refresh_field("monthly_pf_employee_contribution_amount");
                 frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
                 refresh_field("annualized_pf_employee_contribution_amount");
+            }
+        }
+        if (frm.doc.pf_required == "No") {
+            frm.doc.monthly_pf_employee_contribution_amount = 0;
+            refresh_field("monthly_pf_employee_contribution_amount");
+            frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
+            refresh_field("annualized_pf_employee_contribution_amount");
+        }
 
-            }
-             /*----------------------------------------pf_employer_contribution_amount----------------------- */
-             if(frm.doc.pf_required == "Yes"){
-                if (frm.doc.monthly_basic_amount <= 15000){
-                    frm.doc.monthly_pf_employer_contribution_amount = frm.doc.monthly_basic_amount * 12/100;
+        /*----------------------------------------pf_employer_contribution_amount----------------------- */
+        if (frm.doc.pf_required == "Yes") {
+            // Apply the same logic for employer contribution when pf_required is "Yes"
+            if (frm.doc.custom_pf_type == "Standard") {
+                if (frm.doc.monthly_basic_amount <= 15000) {
+                    frm.doc.monthly_pf_employer_contribution_amount = frm.doc.monthly_basic_amount * 12 / 100;
                     refresh_field("monthly_pf_employer_contribution_amount");
-                    frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employee_contribution_amount * 12;
+                    frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employer_contribution_amount * 12;
                     refresh_field("annualized_pf_employer_contribution");
-                    }
-                    if (frm.doc.monthly_basic_amount > 15000){
+                }
+                if (frm.doc.monthly_basic_amount > 15000) {
                     frm.doc.monthly_pf_employer_contribution_amount = 1800;
                     refresh_field("monthly_pf_employer_contribution_amount");
-                    frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employee_contribution_amount * 12;
+                    frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employer_contribution_amount * 12;
                     refresh_field("annualized_pf_employer_contribution");
-                    }
                 }
-                if(frm.doc.pf_required == "No"){
-                    frm.doc.monthly_pf_employer_contribution_amount = 0;
-                    refresh_field("monthly_pf_employer_contribution_amount");
-                    frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employee_contribution_amount * 12;
-                    refresh_field("annualized_pf_employer_contribution");
-    
-                }
+            }
+            // If custom_pf_type is "VPF", the employer contribution stays as per "Standard"
+            else if (frm.doc.custom_pf_type == "VPF") {
+                frm.doc.monthly_pf_employer_contribution_amount = frm.doc.monthly_basic_amount * 12 / 100;
+                refresh_field("monthly_pf_employer_contribution_amount");
+                frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employer_contribution_amount * 12;
+                refresh_field("annualized_pf_employer_contribution");
+            }
+        }
+        if (frm.doc.pf_required == "No") {
+            frm.doc.monthly_pf_employer_contribution_amount = 0;
+            refresh_field("monthly_pf_employer_contribution_amount");
+            frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employee_contribution_amount * 12;
+            refresh_field("annualized_pf_employer_contribution");
+        }
 
             frm.doc.monthly_professional_tax_amount = 200;
             refresh_field("monthly_professional_tax_amount");

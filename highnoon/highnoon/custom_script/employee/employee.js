@@ -41,9 +41,6 @@ frappe.ui.form.on('Employee', {
 
 
                 })
-                    frappe.db.get_value('Employee Onboarding', {'job_applicant': frm.doc.job_applicants}, 'wo_po_id', (r)=>{
-                    frm.set_value('work_order_number', r.wo_po_id)
-                    })
                     frappe.db.get_value('Job Offer',{"name":frm.doc.job_offer }, ['base'],  (r)=>{
                         frm.set_value('new_salary_per_month', r.base)
                     })

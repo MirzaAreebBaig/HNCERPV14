@@ -165,9 +165,7 @@ def validate_sales_invoice_joining_date(doc,method):
             
 #-----------------------------------Pan card uniqueness checked Globally regardless of entity ----------
 def pan_card_uniqueness(doc,method):
-    if frappe.db.exists("Job Applicant", {"company_name": doc.company_name, "pan_card": doc.pan_card, "aadhar_card": doc.aadhar_card}) and doc.is_new():
-        frappe.throw(frappe._("A pan card number - {0} and aadhar card number- {1} already exists with company name - {2}").format(doc.pan_card,doc.aadhar_card,doc.company_name))
-
+     ()
 
 
 

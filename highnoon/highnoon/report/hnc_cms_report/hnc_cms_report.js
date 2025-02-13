@@ -1,7 +1,3 @@
-// Copyright (c) 2023, 	kiran.c@indictrans.in and contributors
-// For license information, please see license.txt
-/* eslint-disable */
-
 frappe.query_reports["HNC CMS Report"] = {
 	"filters": [
 		{
@@ -13,16 +9,16 @@ frappe.query_reports["HNC CMS Report"] = {
 			"reqd":0,
 		},
 		{
-			"fieldname":"from",
-			"label": __("From Date"),
+			"fieldname":"start_date",
+			"label": __("Start Date"),
 			"fieldtype": "Date",
 			"width": 80,
 			// "reqd":0,
 			// "default": dateutil.year_start()
 		},
 		{
-			"fieldname":"to",
-			"label": __("To Date"),
+			"fieldname":"end_date",
+			"label": __("End Date"),
 			"fieldtype": "Date",
 			"width": 80,
 			// "reqd":1,

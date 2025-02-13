@@ -113,7 +113,7 @@ fixtures = ["Custom Field", "Property Setter", "Print Format", "Workflow", "Work
 
 doc_events = {
 	"Sales Invoice":{
-		"before_save":["highnoon.highnoon.custom_script.sales_invoice.sales_invoice.validate_item_end_date","highnoon.highnoon.custom_script.sales_invoice.sales_invoice.before_save","highnoon.highnoon.custom_script.sales_invoice.sales_invoice.before_save_validate"],
+		"before_save":["highnoon.highnoon.custom_script.sales_invoice.sales_invoice.validate_item_end_date","highnoon.highnoon.custom_script.sales_invoice.sales_invoice.before_save"],
 		"before_insert": "highnoon.highnoon.custom_script.sales_invoice.sales_invoice.validate_item_life"
 		
 	},
@@ -135,7 +135,6 @@ doc_events = {
 		"before_save":["highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_job_offer_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_employee_onboarding_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_employee_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_item_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.validate_sales_invoice_joining_date","highnoon.highnoon.custom_script.job_applicant.job_applicant.pan_card_uniqueness"]
 
 	}
-	
 	
 	
 }
@@ -178,6 +177,10 @@ scheduler_events = {
 # override_whitelisted_methods = {
 #	"frappe.desk.doctype.event.event.get_events": "highnoon.event.get_events"
 # }
+override_whitelisted_methods = {
+    "erpnext.projects.doctype.timesheet.timesheet.get_projectwise_timesheet_data": "highnoon.timesheet.get_projectwise_timesheet_data",
+	"hrms.payroll.doctype.payroll_entry.payroll_entry.fill_employee_details": "highnoon.payroll_entry.fill_employee_details"
+}
 #
 # each overriding function accepts a `data` argument;
 # generated from the base implementation of the doctype dashboard,
