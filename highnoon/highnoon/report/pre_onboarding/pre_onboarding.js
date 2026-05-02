@@ -31,6 +31,7 @@ frappe.query_reports["Pre-Onboarding"] = {
         // Default color for candidate_name and date_of_joining
         const all_fields_yes = data.resigned === 1 &&
                                data.resignation_accepted === 1 &&
+                               data.bench_onb_ === 1 &&
                                data.bgv_ir_cleared === 1 &&
                                data.relocated__at_work_location &&
                                data.last_working_date;
@@ -46,7 +47,7 @@ frappe.query_reports["Pre-Onboarding"] = {
 
         // Conditional styling for resigned, resignation_accepted, relocated_at_work_location, and last_working_date fields
         // Conditional styling for resigned, resignation_accepted, relocated_at_work_location, and last_working_date fields
-        if (["resigned", "resignation_accepted", "relocated__at_work_location", "last_working_date", "bgv_ir_cleared"].includes(column.fieldname)) {
+        if (["resigned", "resignation_accepted","bench_onb_", "relocated__at_work_location", "last_working_date", "bgv_ir_cleared"].includes(column.fieldname)) {
             if (column.fieldname === "relocated__at_work_location" && data.relocated__at_work_location) {
                 value = `<div style="background-color: #00c928; padding: 2px; border-radius: 2px; color: #F9FAFA">${value}</div>`; // Green
             } else if (column.fieldname === "last_working_date" && data.last_working_date) {

@@ -35,10 +35,10 @@ def before_save(doc, method):
                 )
                 
                 # Check if any fetched record is submitted
-                for invoice in existing_invoices:
-                    if invoice.docstatus == 1:
-                        frappe.throw(frappe._("Till ({0}) invoice is already generated for employee '{1}'. Please generate next invoice from date ({2}).").format(doc.start_date1, doc.employee_name, q))
-                        return
+                # for invoice in existing_invoices:
+                #     if invoice.docstatus == 1:
+                #         frappe.throw(frappe._("Till ({0}) invoice is already generated for employee '{1}'. Please generate next invoice from date ({2}).").format(doc.start_date1, doc.employee_name, q))
+                #         return
 
 # def before_save_validate(doc, method):
 #     if doc.items:

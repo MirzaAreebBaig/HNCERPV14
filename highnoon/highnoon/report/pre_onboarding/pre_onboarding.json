@@ -6,11 +6,11 @@
  "docstatus": 0,
  "doctype": "Report",
  "filters": [],
- "idx": 0,
+ "idx": 23,
  "is_standard": "Yes",
  "letter_head": "HNCPL LOGO",
  "letterhead": null,
- "modified": "2024-12-02 15:37:42.046192",
+ "modified": "2025-09-11 10:14:44.935111",
  "modified_by": "Administrator",
  "module": "Highnoon",
  "name": "Pre-Onboarding",
@@ -22,6 +22,10 @@
  "roles": [
   {
    "role": "System Manager"
+  },
+  {
+   "role": "ZHD-HR-SHARED-SERVICES"
   }
- ]
+ ],
+ "timeout": 0
 }
