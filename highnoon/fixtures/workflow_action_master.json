@@ -2,71 +2,148 @@
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
-  "modified": "2022-05-27 16:14:13.293509",
-  "name": "Approve",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "workflow_action_name": "Approve"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
-  "modified": "2022-05-27 16:14:13.296506",
-  "name": "Reject",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "workflow_action_name": "Reject"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
   "modified": "2022-05-27 16:14:13.298608",
   "name": "Review",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
   "workflow_action_name": "Review"
- },
- {
-  "docstatus": 0,
-  "doctype": "Workflow Action Master",
-  "modified": "2023-02-16 18:10:24.664186",
-  "name": "Send for CAM Approval",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
-  "workflow_action_name": "Send for CAM Approval"
  },
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
   "modified": "2023-02-16 18:10:58.919867",
   "name": "Approved by CAM",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
   "workflow_action_name": "Approved by CAM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-09-24 18:19:53.017003",
+  "name": "Approved by AA",
+  "workflow_action_name": "Approved by AA"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-09-24 18:20:33.706628",
+  "name": "Approved by AP",
+  "workflow_action_name": "Approved by AP"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-02-16 16:37:11.145565",
+  "name": "submit",
+  "workflow_action_name": "submit"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-17 11:21:26.255537",
+  "name": "Send for OPS Approval",
+  "workflow_action_name": "Send for OPS Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2026-04-15 12:25:47.086030",
+  "name": "Approve for Payment Processing",
+  "workflow_action_name": "Approve for Payment Processing"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2022-05-27 16:14:13.293509",
+  "name": "Approve",
+  "workflow_action_name": "Approve"
  },
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
   "modified": "2023-02-16 18:11:45.657681",
   "name": "Reject by CAM",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
   "workflow_action_name": "Reject by CAM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-07-25 14:55:27.381999",
+  "name": "Send for TM Approval",
+  "workflow_action_name": "Send for TM Approval"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-07-25 14:58:13.559533",
+  "name": "Approved by TM",
+  "workflow_action_name": "Approved by TM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-07-25 14:59:49.273991",
+  "name": "Approved by SQ",
+  "workflow_action_name": "Approved by SQ"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-07-25 15:18:08.804794",
+  "name": "Rejected by TM",
+  "workflow_action_name": "Rejected by TM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-07-25 15:18:49.063047",
+  "name": "Rejected by CAM",
+  "workflow_action_name": "Rejected by CAM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-07-25 15:19:38.516130",
+  "name": "Rejected by SQ",
+  "workflow_action_name": "Rejected by SQ"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2025-11-05 11:40:41.149675",
+  "name": "Approve for Payment",
+  "workflow_action_name": "Approve for Payment"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-02-16 18:10:24.664186",
+  "name": "Send for CAM Approval",
+  "workflow_action_name": "Send for CAM Approval"
  },
  {
   "docstatus": 0,
   "doctype": "Workflow Action Master",
   "modified": "2023-02-16 18:12:06.397469",
   "name": "Approve by CAM",
-  "parent": null,
-  "parentfield": null,
-  "parenttype": null,
   "workflow_action_name": "Approve by CAM"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2023-08-17 11:22:38.512812",
+  "name": "Approved by OPS",
+  "workflow_action_name": "Approved by OPS"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2022-05-27 16:14:13.296506",
+  "name": "Reject",
+  "workflow_action_name": "Reject"
+ },
+ {
+  "docstatus": 0,
+  "doctype": "Workflow Action Master",
+  "modified": "2024-09-27 11:07:03.239835",
+  "name": "Send for Approval",
+  "workflow_action_name": "Send for Approval"
  }
 ]

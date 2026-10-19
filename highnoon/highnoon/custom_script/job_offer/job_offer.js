@@ -22,10 +22,6 @@ frappe.ui.form.on('Job Offer', {
         refresh_field("monthly_special_allowance_amount");
         frm.doc.annualized_special_allowance_amount= frm.doc.monthly_special_allowance_amount * 12;
         refresh_field("annualized_special_allowance_amount");
-        frm.doc.monthly_pf_employer_contribution_amount= 1800;
-        refresh_field("monthly_pf_employer_contribution_amount")
-        frm.doc.annualized_pf_employer_contribution= frm.doc.monthly_pf_employer_contribution_amount * 12;
-        refresh_field("annualized_pf_employer_contribution");
         /*//////////////////////////////////////// ESIC Employer  calculation/////////////////////*/    
         if(frm.doc.esic_required == "Yes"){
         if (frm.doc.base <= 15000){
@@ -76,14 +72,15 @@ frappe.ui.form.on('Job Offer', {
         if (frm.doc.pf_required == "Yes") {
             // Check if custom_pf_type is "Standard"
             if (frm.doc.custom_pf_type == "Standard") {
-                if (frm.doc.monthly_basic_amount <= 15000) {
+                // PF = IF(Basic > 25000, 3000, Basic * 12%)
+                if (frm.doc.monthly_basic_amount <= 25000) {
                     frm.doc.monthly_pf_employee_contribution_amount = frm.doc.monthly_basic_amount * 12 / 100;
                     refresh_field("monthly_pf_employee_contribution_amount");
                     frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
                     refresh_field("annualized_pf_employee_contribution_amount");
                 }
-                if (frm.doc.monthly_basic_amount > 15000) {
-                    frm.doc.monthly_pf_employee_contribution_amount = 1800;
+                if (frm.doc.monthly_basic_amount > 25000) {
+                    frm.doc.monthly_pf_employee_contribution_amount = 3000;
                     refresh_field("monthly_pf_employee_contribution_amount");
                     frm.doc.annualized_pf_employee_contribution_amount = frm.doc.monthly_pf_employee_contribution_amount * 12;
                     refresh_field("annualized_pf_employee_contribution_amount");
@@ -108,14 +105,15 @@ frappe.ui.form.on('Job Offer', {
         if (frm.doc.pf_required == "Yes") {
             // Apply the same logic for employer contribution when pf_required is "Yes"
             if (frm.doc.custom_pf_type == "Standard") {
-                if (frm.doc.monthly_basic_amount <= 15000) {
+                // PF = IF(Basic > 25000, 3000, Basic * 12%)
+                if (frm.doc.monthly_basic_amount <= 25000) {
                     frm.doc.monthly_pf_employer_contribution_amount = frm.doc.monthly_basic_amount * 12 / 100;
                     refresh_field("monthly_pf_employer_contribution_amount");
                     frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employer_contribution_amount * 12;
                     refresh_field("annualized_pf_employer_contribution");
                 }
-                if (frm.doc.monthly_basic_amount > 15000) {
-                    frm.doc.monthly_pf_employer_contribution_amount = 1800;
+                if (frm.doc.monthly_basic_amount > 25000) {
+                    frm.doc.monthly_pf_employer_contribution_amount = 3000;
                     refresh_field("monthly_pf_employer_contribution_amount");
                     frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employer_contribution_amount * 12;
                     refresh_field("annualized_pf_employer_contribution");
@@ -132,7 +130,7 @@ frappe.ui.form.on('Job Offer', {
         if (frm.doc.pf_required == "No") {
             frm.doc.monthly_pf_employer_contribution_amount = 0;
             refresh_field("monthly_pf_employer_contribution_amount");
-            frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employee_contribution_amount * 12;
+            frm.doc.annualized_pf_employer_contribution = frm.doc.monthly_pf_employer_contribution_amount * 12;
             refresh_field("annualized_pf_employer_contribution");
         }
 
@@ -211,7 +209,48 @@ frappe.ui.form.on('Job Offer', {
             /*-------------------------------  Total Tax Liability ---------------------*/
             frm.doc.total_tax_liability=frm.doc.balance_tax + frm.doc.health_and_education_cess;
             refresh_field("total_tax_liability");
- 
+
+            /* -----------------------------Income Tax Calculation (New Regime) ------------------ */
+            frm.doc.custom_standard_deduction_new_regime = 75000;
+            refresh_field("custom_standard_deduction_new_regime");
+            frm.doc.custom_total_income_new_regime = Math.max(frm.doc.annual_gross_salary - frm.doc.custom_standard_deduction_new_regime, 0);
+            refresh_field("custom_total_income_new_regime");
+
+            let new_regime_income = frm.doc.custom_total_income_new_regime;
+            let new_regime_slabs = [
+                ["custom_income_upto_rs_400000_new_regime", 0, 400000, 0],
+                ["custom_from_rs_400001_to_rs_800000_new_regime", 400000, 800000, 0.05],
+                ["custom_from_rs_800001_to_rs_1200000_new_regime", 800000, 1200000, 0.10],
+                ["custom_from_rs_1200001_to_rs_1600000_new_regime", 1200000, 1600000, 0.15],
+                ["custom_from_rs_1600001_to_rs_2000000_new_regime", 1600000, 2000000, 0.20],
+                ["custom_from_rs_2000001_to_rs_2400000_new_regime", 2000000, 2400000, 0.25],
+                ["custom_above_rs_2400000_new_regime", 2400000, Infinity, 0.30],
+            ];
+            frm.doc.custom__total_tax_on_taxable_income_pa_new_regime = 0;
+            new_regime_slabs.forEach(([fieldname, from, to, rate]) => {
+                frm.doc[fieldname] = Math.max(Math.min(new_regime_income, to) - from, 0) * rate;
+                refresh_field(fieldname);
+                frm.doc.custom__total_tax_on_taxable_income_pa_new_regime += frm.doc[fieldname];
+            });
+            refresh_field("custom__total_tax_on_taxable_income_pa_new_regime");
+            /*------------------Rebate u/s 87A (max 60,000 if income <= 12 lakhs, with marginal relief above) ------------------------------*/
+            let new_regime_tax = frm.doc.custom__total_tax_on_taxable_income_pa_new_regime;
+            if (new_regime_income <= 1200000) {
+                frm.doc.custom_rebate_new_regime = Math.min(new_regime_tax, 60000);
+            } else {
+                frm.doc.custom_rebate_new_regime = Math.max(new_regime_tax - (new_regime_income - 1200000), 0);
+            }
+            refresh_field("custom_rebate_new_regime");
+            /*---------------------------------------Balance Tax-------------------------*/
+            frm.doc.custom_balance_tax_new_regime = new_regime_tax - frm.doc.custom_rebate_new_regime;
+            refresh_field("custom_balance_tax_new_regime");
+            /*---------------------------------- Health & Education Cess @ 4% --------------------*/
+            frm.doc.custom_health_and_education_cess_new_regime = frm.doc.custom_balance_tax_new_regime * 0.04;
+            refresh_field("custom_health_and_education_cess_new_regime");
+            /*-------------------------------  Total Tax Liability ---------------------*/
+            frm.doc.custom_total_tax_liability_new_regime = frm.doc.custom_balance_tax_new_regime + frm.doc.custom_health_and_education_cess_new_regime;
+            refresh_field("custom_total_tax_liability_new_regime");
+
 
 
 
